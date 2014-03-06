@@ -1,0 +1,26 @@
+<div class="dialog-frame extraction">
+    <div class="dialog-header">
+        Standard projection convertion on <span class="column-name">column</span>
+    </div>
+    <div class="dialog-body">
+        <fieldset>
+           <p id="description">
+               You need to select which projection standard belongs your data
+               and then you can choose to which kind of projection standard you desire
+           </p>
+            <div id="fromwrapper" class="combo-wrapper">
+                <label for="from_projection">From </label>
+                <input id="from_projection">
+            </div>
+            <div id="towrapper" class="combo-wrapper">
+                <label for="to_projection">To: </label>
+                <input id="to_projection">
+            </div>
+        </fieldset>
+
+    </div>
+    <div class="dialog-footer">
+        <button bind="cancel" class="button">Cancel</button>
+        <button bind="convert" class="button">Convert</button>
+    </div>
+</div>
