@@ -5,9 +5,7 @@ function geoConvertDialog(column) {
 geoConvertDialog.prototype = {
     init: function (callback) {
         var self = this,
-            selectedServices = {},
             dialogElement = this.dialogElement = $(DOM.loadHTML("geo-extension", "dialogs/geoConvert.html"));
-        var operazione = new String();
 
         /* Set labels */
         $('.column-name', dialogElement).text(this.column.name);
@@ -83,6 +81,3 @@ geoConvertDialog.prototype = {
     },
 
 };
-
-
-

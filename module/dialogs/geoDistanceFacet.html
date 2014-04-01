@@ -1,0 +1,20 @@
+<div class="dialog-frame geo">
+    <div class="dialog-header">
+        Show wkt objects on the map <span class="column-name"> column</span>
+    </div>
+    <div class="dialog-body">
+        <fieldset>
+            <p id="description">
+                Bla<br/>
+                <b>IMPORTANT</b>: The projection of the coordinates is in WGS 84
+            </p>
+            <lable> latitude: </lable> <input id="latChosen"><br>
+            <lable> longitude: </lable> <input id="lonChosen">
+        </fieldset>
+        <div id="map"></div>
+    </div>
+    <div class="dialog-footer">
+        <button bind="cancel" class="button">Cancel</button>
+        <button bind="ok" class="button">Ok</button>
+    </div>
+</div>

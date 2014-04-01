@@ -5,3 +5,8 @@ Object.defineProperty(Object.prototype, "geoLink", {
     return this[boundName] || (this[boundName] = this[methodName].bind(this));
   },
 });
+
+
+function endsWith(str, suffix) {
+    return str.indexOf(suffix, str.length - suffix.length) !== -1;
+}

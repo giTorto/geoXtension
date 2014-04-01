@@ -2,12 +2,10 @@ package free.giTorto.operations;
 
 import com.google.refine.browsing.RowVisitor;
 import com.google.refine.expr.EvalError;
-import com.google.refine.model.Cell;
-import com.google.refine.model.Column;
-import com.google.refine.model.Project;
-import com.google.refine.model.Row;
+import com.google.refine.model.*;
 import com.google.refine.model.changes.CellChange;
 import com.google.refine.operations.EngineDependentMassCellOperation;
+import com.google.refine.operations.OperationRegistry;
 import org.gdal.ogr.Geometry;
 import org.gdal.osr.CoordinateTransformation;
 import org.gdal.osr.SpatialReference;
@@ -36,12 +34,32 @@ public class GeoConvertionOperation extends EngineDependentMassCellOperation {
         this.data = data;
         this.column = column;
         this.project = project;
+
+        int n = project.rows.size();
+
         //initializing the coordinate transformation
         SpatialReference from = new SpatialReference();
         SpatialReference to = new SpatialReference();
         from.ImportFromEPSG(Integer.parseInt((String)data.get("from")));
         to.ImportFromEPSG(Integer.parseInt((String)data.get("to")));
         this.ct = new CoordinateTransformation(from, to);
+    }
+
+    static public AbstractOperation reconstruct(Project project, JSONObject obj) throws Exception {
+        JSONObject engineConfig = obj.getJSONObject("engineConfig");
+
+        String columName = obj.getString("columnName");
+        String from = obj.getString("from");
+        String to = obj.getString("to");
+        String comm = obj.getString("op");
+
+        Column column = project.columnModel.getColumnByName(columName);
+        HashMap<String,Object> dati = new HashMap<String, Object>();
+        dati.put("from",from);
+        dati.put("to",to);
+        dati.put("command",comm);
+
+        return new GeoConvertionOperation( project, column, dati, engineConfig);
     }
 
     @Override
@@ -81,6 +99,7 @@ public class GeoConvertionOperation extends EngineDependentMassCellOperation {
                     cellChanges.add(cellChange);
                 }
 
+
                 return false;
             }
 
@@ -93,7 +112,7 @@ public class GeoConvertionOperation extends EngineDependentMassCellOperation {
 
     @Override
     protected String createDescription(Column column, List<CellChange> cellChanges) {
-        return "Text transform on " + cellChanges.size() +
+        return "Wkt Trasformation on " + cellChanges.size() +
                 " cells in column " + column.getName()  ;
     }
 
@@ -106,19 +125,20 @@ public class GeoConvertionOperation extends EngineDependentMassCellOperation {
     @Override
     public void write(JSONWriter writer, Properties options) throws JSONException {
         writer.object();
-        writer.key("op"); writer.value(data.get("command"));
+        writer.key("op"); writer.value(OperationRegistry.s_opClassToName.get(this.getClass()));
         writer.key("description"); writer.value(getBriefDescription(null));
         writer.key("engineConfig"); writer.value(getEngineConfig());
         writer.key("columnName"); writer.value(_columnName);
         writer.key("from"); writer.value(data.get("from"));
         writer.key("to"); writer.value(data.get("to"));
-        /*writer.key("expression"); writer.value(_expression);
-        writer.key("onError"); writer.value(onErrorToString(_onError));
-        writer.key("repeat"); writer.value(_repeat);
-        writer.key("repeatCount"); writer.value(_repeatCount);*/
         writer.endObject();
     }
 
+    /**
+     * This function performs the trasformation between two different Spatial Reference Systems
+     * @param cellVal the value to transform
+     * @return the new cell or a cell containing an evaluation error
+     */
     protected Cell convert(String cellVal) {
         Geometry from_geo = Geometry.CreateFromWkt(cellVal);
 

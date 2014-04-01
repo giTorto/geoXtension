@@ -24,8 +24,19 @@ DataTableColumnHeaderUI.extendMenu(function(column, columnHeaderUI, menu) {
             },
             {
                 id : "geo-extension/visualize",
-                label : "Visualize",
-                click:dialogHandler(geoAboutDialog)
+                label : "Visualize wkt objects",
+                submenu: [
+                    {
+                        id:"geo-extension/showGeo",
+                        label: "All",
+                        click: dialogHandler(geoShowDialog,column,"all")
+                    },
+                    {
+                        id: "geo-extension/showGeo",
+                        label: "What you see",
+                        click: dialogHandler(geoShowDialog,column,"wys")
+                    }
+                ]
             },
             {
                 id : "geo-extension/facets",
@@ -34,7 +45,7 @@ DataTableColumnHeaderUI.extendMenu(function(column, columnHeaderUI, menu) {
                     {
                         id : "geo-extension/facets/distance",
                         label : "Distance",
-                        click:dialogHandler(geoAboutDialog)
+                        click:dialogHandler(geoDistanceFacetDialog,column)
                     },
                     {
                         id : "geo-extension/facets/area",

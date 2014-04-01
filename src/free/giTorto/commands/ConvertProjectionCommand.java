@@ -22,7 +22,7 @@ public class ConvertProjectionCommand extends EngineDependentCommand {
 
         data.put("from",request.getParameter("from"));
         data.put("to", request.getParameter("to"));
-        data.put("command",request.getPathInfo());
+        data.put("command",request.getPathInfo().replaceAll("(/command/)",""));
 
         return new GeoConvertionOperation(project, column,data,engineConfig);
     }
