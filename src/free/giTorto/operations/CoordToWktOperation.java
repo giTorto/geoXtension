@@ -107,6 +107,7 @@ public class CoordToWktOperation extends EngineDependentOperation {
                 longitude = longitude.replaceAll(" ","");
 
                 if (!latitude.equals("") && !longitude.equals("") && pattern.matcher(latitude).matches() && pattern.matcher(longitude).matches()) {
+                    //this is to verify, some source say POINT(x y), but some works with POINT(lat lng) and others with POINT(lng lat) to choose
                     newCell = new CellAtRow(rowIndex, new Cell("POINT (" + latitude + " " + longitude + ")", null));
                 }else{
                     newCell = new CellAtRow(rowIndex, new Cell(new EvalError("The latitude or/and longitude given are not a valid number"), null));
