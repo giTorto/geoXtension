@@ -17,7 +17,9 @@ geoDistanceFacetDialog.prototype = {
         /* Bind controls to actions */
         var controls = DOM.bind(this.dialogElement);
         controls.cancel.click(this.geoLink("hide"));
-        controls.ok.click(self.run(this.column));
+        controls.ok.click(function() {
+            self.run(this.column)
+        });
 
         if (callback)
             callback.apply(self);
@@ -60,18 +62,18 @@ geoDistanceFacetDialog.prototype = {
 
     run: function (column) {
         var self = this;
-        var data = {  };
-        data["column"] = column.name;
-        if (self.point != null) {
-            data["pointLat"] = self.point.lat;
-            data["pointLon"] = self.point.lng;
-        }
-        //some browsingEngine operation needed
-        //BrowsingEngine._facets.push();
-        //reimplement what happens in browsingEngine.addFacet()
 
-        Refine.postProcess('geo-extension', 'facetsGeo', data, {},
-            { rowsChanged: true, modelsChanged: true });
+        var expression = "value.distanceFromAPoint(\"POINT ("+self.point.lng+" "+self.point.lat+")\")";
+        console.info(expression);
+        ui.browsingEngine.addFacet(
+            "range",
+            {
+                "name": self.column.name,
+                "columnName": self.column.name,
+                "expression": expression,
+                "mode": "range"
+            }
+        );
 
         this.hide();
     }

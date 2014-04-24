@@ -1,0 +1,33 @@
+<div class="dialog-frame geo">
+    <div class="dialog-header">
+        Standard projection convertion on <span class="column-name">column</span>
+    </div>
+    <div class="dialog-body">
+        <fieldset>
+           <p id="description">
+               You need to select which column will represent the latitude and the longitude of the wkt point
+               that will be created
+           </p>
+            <div class="combo-wrapper geo">
+                <div class="forSelect">
+                    <label> The latitude</label>
+                    <select id="latitude"></select>
+                </div>
+            </div>
+            <div>
+                <button class="button geo" onclick="swapValues()"><img class="image geo" src="https://cdn4.iconfinder.com/data/icons/pictype-free-vector-icons/16/sync-128.png" alt="swap latitude and longitude" /></button>
+            </div>
+            <div id="combo-wrapper geo">
+                <div class="forSelect">
+                    <label> The longitude</label>
+                    <select id="longitude"></select>
+                </div>
+            </div>
+        </fieldset>
+
+    </div>
+    <div class="dialog-footer">
+        <button bind="cancel" class="button">Cancel</button>
+        <button bind="create" class="button">Create</button>
+    </div>
+</div>

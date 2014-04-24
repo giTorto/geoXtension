@@ -21,21 +21,19 @@ import java.util.Properties;
 /**
  * @author Giuliano Tortoreto
  */
-public class GeoConvertionOperation extends EngineDependentMassCellOperation {
+public class WktConvertionOperation extends EngineDependentMassCellOperation {
     final Column column;
     final HashMap<String,Object> data;
     final JSONObject engineConfig;
     final Project project;
     final CoordinateTransformation ct;
 
-    public GeoConvertionOperation(final Project project, final Column column, final HashMap<String, Object> data, final JSONObject engineConfig){
+    public WktConvertionOperation(final Project project, final Column column, final HashMap<String, Object> data, final JSONObject engineConfig){
         super(engineConfig,column.getName(),true);
         this.engineConfig = engineConfig;
         this.data = data;
         this.column = column;
         this.project = project;
-
-        int n = project.rows.size();
 
         //initializing the coordinate transformation
         SpatialReference from = new SpatialReference();
@@ -59,7 +57,7 @@ public class GeoConvertionOperation extends EngineDependentMassCellOperation {
         dati.put("to",to);
         dati.put("command",comm);
 
-        return new GeoConvertionOperation( project, column, dati, engineConfig);
+        return new WktConvertionOperation( project, column, dati, engineConfig);
     }
 
     @Override
@@ -113,12 +111,12 @@ public class GeoConvertionOperation extends EngineDependentMassCellOperation {
     @Override
     protected String createDescription(Column column, List<CellChange> cellChanges) {
         return "Wkt Trasformation on " + cellChanges.size() +
-                " cells in column " + column.getName()  ;
+                " cells in columnName " + column.getName()  ;
     }
 
     @Override
     protected String getBriefDescription(Project project) {
-        return "Projection transform from "+ data.get("from") + " projection to " + data.get("to") +" on cells in column " + _columnName;
+        return "Projection transform from "+ data.get("from") + " projection to " + data.get("to") +" on cells in columnName " + _columnName;
     }
 
 

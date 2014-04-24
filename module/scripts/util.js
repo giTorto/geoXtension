@@ -10,3 +10,15 @@ Object.defineProperty(Object.prototype, "geoLink", {
 function endsWith(str, suffix) {
     return str.indexOf(suffix, str.length - suffix.length) !== -1;
 }
+
+function getSelectedText(elementId) {
+    var elt = document.getElementById(elementId);
+
+    if (elt==null)
+        return null;
+
+    if (elt.selectedIndex == -1)
+        return null;
+
+    return elt.options[elt.selectedIndex];
+}

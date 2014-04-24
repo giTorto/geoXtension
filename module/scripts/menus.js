@@ -19,8 +19,20 @@ DataTableColumnHeaderUI.extendMenu(function(column, columnHeaderUI, menu) {
         submenu : [
             {
                 id : "geo-extension/convert",
-                label : "Convert projection",
-                click:dialogHandler(geoConvertDialog, column)
+                label : "Convert",
+                submenu: [
+                    {
+                        id : "geo-extension/convertWkt",
+                        label : "WKT to WKT (different projections)",
+                        click:dialogHandler(geoConvertDialog, column)
+                    },
+                    {
+                        id : "geo-extension/convertCoordToWkt",
+                        label : "Latitude and Longitude to WKT point",
+                        click:dialogHandler(geoCoordToWktConvertDialog, column)
+                    }
+                ]
+
             },
             {
                 id : "geo-extension/visualize",

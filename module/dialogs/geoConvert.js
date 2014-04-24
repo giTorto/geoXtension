@@ -17,7 +17,13 @@ geoConvertDialog.prototype = {
         controls.convert.click(function () {
             var from=$('#from_projection').val();
             var to =$('#to_projection').val();
-            self.execute(from, to);
+
+            if ( from!=null && from!="" && from!=" " && to != null && to!="" && to!=" "){
+                self.execute(from, to);
+            }else{
+                alert("You must choose both from which projection and to which projection");
+            }
+
         });
 
         if (callback)
@@ -68,16 +74,20 @@ geoConvertDialog.prototype = {
         }
 
         for(var i in coord_ref_sistem){
-            if ( (String)(coord_ref_sistem[i].label).contains(from)) {
+            if ( (String)(coord_ref_sistem[i].label.toLowerCase()).contains(from.toLowerCase())) {
                 data["from"] = coord_ref_sistem[i].code;
-            }else if ((String)(coord_ref_sistem[i].label).contains(to) ) {
+            }else if ((String)(coord_ref_sistem[i].label.toLowerCase()).contains(to.toLowerCase()) ) {
                 data["to"] = coord_ref_sistem[i].code;
             }
         }
 
+        if (data["from"]==null || data["to"]==null){
+            alert("Sorry, the chosen projections are not supported!");
+        }else{
         Refine.postProcess('geo-extension', 'convertGeo', data, {},
             { rowsChanged: true, modelsChanged: true });
         this.hide();
+        }
     },
 
 };

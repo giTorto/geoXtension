@@ -9,13 +9,23 @@ function init() {
 
     var cacheFolder = new refineServlet().getCacheDir("geo-extension");
 
+    //adding commands
     RS.registerCommand(module, "convertGeo", new Packages.free.giTorto.commands.ConvertProjectionCommand);
+    RS.registerCommand(module, "convertLatLngToWKT", new Packages.free.giTorto.commands.ConvertCoordToWktCommand);
     RS.registerCommand(module, "showGeo", new Packages.free.giTorto.commands.ShowOnMapCommand);
     RS.registerCommand(module, "facetsGeo", new Packages.free.giTorto.commands.GeoFacetCommand);
 
+    //adding operations
     operationRegistry.registerOperation(
-        module, "ConvertionOperation", Packages.free.giTorto.operations.GeoConvertionOperation
+        module, "WktConvertionOperation", Packages.free.giTorto.operations.WktConvertionOperation
     );
+    operationRegistry.registerOperation(
+        module, "CoordConvertionOperation", Packages.free.giTorto.operations.CoordToWktOperation
+    );
+
+    //adding functions
+    Packages.com.google.refine.grel.ControlFunctionRegistry.registerFunction(
+        "distanceFromAPoint", new Packages.free.giTorto.functions.geoDistanceFromAPoint());
 
     // Script files to inject into /project page
     var resourceManager = Packages.com.google.refine.ClientSideResourceManager;
@@ -24,6 +34,7 @@ function init() {
         module,
         [
             "dialogs/geoConvert.js",
+            "dialogs/geoCoordToWktConvert.js",
             "scripts/util.js",
             "dialogs/about.js",
             "dialogs/geoShow.js",
@@ -41,6 +52,7 @@ function init() {
         [
             "dialogs/geoDistanceFacet.less",
             "dialogs/geoShow.less",
+            "dialogs/geoCoordToWktConvert.less",
             "dialogs/geoConvert.less",
             "dialogs/about.less",
             "styles/dialogs.less",

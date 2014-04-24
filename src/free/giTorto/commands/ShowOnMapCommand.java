@@ -161,7 +161,7 @@ public class ShowOnMapCommand extends Command {
                     //setting the geoJson feature
                     geoJson.put("type", "Feature");
                     geoJson.put("geometry", new JSONObject(geo.ExportToJson()));
-                    geoJson.put("properties", new JSONObject("{\"message\": \"row: " + tempArray[0] + ", 1° column: " + tempArray[1] + " \" }"));
+                    geoJson.put("properties", new JSONObject("{\"message\": \"row: " + tempArray[0] + ", first column: " + tempArray[1] + " \" }"));
                     geoJson.put("id", rowIndex);
                 } catch (JSONException e) {
                     e.printStackTrace();
