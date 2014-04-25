@@ -65,7 +65,7 @@ DataTableColumnHeaderUI.extendMenu(function (column, columnHeaderUI, menu) {
                         {
                             id: "geo-extension/facets/area",
                             label: "Area",
-                            click: dialogHandler(geoAboutDialog)
+                            click: dialogHandler(geoAreaFacetDialog,column)
                         },
                         {
                             id: "geo-extension/facets/type",

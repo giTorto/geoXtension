@@ -1,16 +1,15 @@
 <div class="dialog-frame geo">
     <div class="dialog-header">
-        Choose a point on the map, based on <span class="column-name"> column</span> you'll see
-        the distance from that point
+        Draw polygons on the map, the facet will tell you if the wkt in <span class="column-name"> column</span>
+        belongs to the polygons you drawn or not
     </div>
     <div class="dialog-body">
         <fieldset>
             <p id="description">
-                Choose a point on the map and click<br/>
+                Draw a polygon, a rectangle or a circle and the facet will let you now
+                which rows belong to what you have drawn or not<br/>
                 <b>IMPORTANT</b>: The projection of the coordinates is in WGS 84
             </p>
-            <lable> latitude: </lable> <input id="latChosen"><br>
-            <lable> longitude: </lable> <input id="lonChosen">
         </fieldset>
         <div id="map"></div>
     </div>
