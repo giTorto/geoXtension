@@ -48,7 +48,7 @@ function circleToGeoJSON(layer){
     var r_latitude = (radius/earthRadius) * r2d;
     var r_longitude = r_latitude / Math.cos(center.lat * d2r);
 
-    for (var i=0; i < points; i++) // one extra here makes sure we connect the
+    for (var i=0; i < points+1; i++) // one extra here makes sure we connect the
     {
         var theta = (Math.PI * (i / (points/2)));
         lat_lng = [];
@@ -57,8 +57,11 @@ function circleToGeoJSON(layer){
         coordinates.push(lat_lng);
     }
 
-    if(coordinates[0] == coordinates[coordinates.length-1])
-        coordinates = coordinates.splice(coordinates.length-1,1);
+/*    if(coordinates[0] == coordinates[coordinates.length-1])
+        coordinates = coordinates.splice(coordinates.length-1,1);*/
+    if(coordinates[0] != coordinates[coordinates.length-1])
+        coordinates.push(coordinates[0]);
+    console.info(coordinates);
 
     geometry["coordinates"].push(coordinates);
     geoJson["geometry"]=geometry;

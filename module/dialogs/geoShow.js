@@ -41,8 +41,11 @@ geoShowDialog.prototype = {
                             ]
                         };
 
-                        for (var index = 0; index < arrayJson.length; index++)
+                        for (var index = 0; index < arrayJson.length; index++){
                             geoData["features"].push(JSON.parse(arrayJson[index].geoFeature));
+                            console.info(arrayJson[index].geoFeature);
+                        }
+
 
                         var geoJsonLayer = L.geoJson(geoData, {
                             onEachFeature: function (feature, layer) {

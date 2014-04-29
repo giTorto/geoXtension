@@ -65,6 +65,7 @@ geoDistanceFacetDialog.prototype = {
 
         var expression = "value.distanceFromAPoint(\"POINT (" + self.point.lng + " " + self.point.lat + ")\")";
         console.info(expression);
+
         ui.browsingEngine.addFacet(
             "range",
             {
@@ -72,6 +73,9 @@ geoDistanceFacetDialog.prototype = {
                 "columnName": self.column.name,
                 "expression": expression,
                 "mode": "range"
+            },
+            {
+
             }
         );
 

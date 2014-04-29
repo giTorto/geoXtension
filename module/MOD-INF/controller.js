@@ -41,10 +41,10 @@ function init() {
             "scripts/config.js",
             "scripts/menus.js",
             "scripts/coordinate-ref-geo.js",
-            "scripts/util.js",
+            "scripts/util.js"
 
-            //import for Leaflet.draw   
-            "leaflet.draw/examples/libs/leaflet-src.js",
+            //import for Leaflet.draw
+           /* "leaflet.draw/examples/libs/leaflet-src.js",
             "leaflet.draw/src/Leaflet.draw.js",
             "leaflet.draw/src/edit/handler/Edit.Poly.js",
             "leaflet.draw/src/edit/handler/Edit.SimpleShape.js",
@@ -72,7 +72,7 @@ function init() {
             "leaflet.draw/src/draw/DrawToolbar.js",
             "leaflet.draw/src/edit/EditToolbar.js",
             "leaflet.draw/src/edit/handler/EditToolbar.Edit.js",
-            "leaflet.draw/src/edit/handler/EditToolbar.Delete.js"
+            "leaflet.draw/src/edit/handler/EditToolbar.Delete.js"*/
         ]
     );
 
@@ -91,7 +91,7 @@ function init() {
             "styles/main.less",
             //import to use leaflet.draw
             //"leaflet.draw/examples/libs/leaflet.css",
-            "leaflet.draw/dist/leaflet.draw.css"
+            //"leaflet.draw/dist/leaflet.draw.css"
         ]
     );
 }
