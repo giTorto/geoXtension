@@ -18,11 +18,11 @@ public class ConvertProjectionCommand extends EngineDependentCommand {
     protected AbstractOperation createOperation(Project project, HttpServletRequest request, JSONObject engineConfig) throws Exception {
         String columName = request.getParameter("column");
         Column column = project.columnModel.getColumnByName(columName);
-        HashMap<String,Object> data = new HashMap();
+        HashMap<String, Object> data = new HashMap<String, Object>();
 
-        data.put("from",request.getParameter("from"));
+        data.put("from", request.getParameter("from"));
         data.put("to", request.getParameter("to"));
-        data.put("command",request.getPathInfo().replaceAll("(/command/)",""));
+        data.put("command", request.getPathInfo().replaceAll("(/command/)", ""));
 
         return new WktConvertionOperation(project, column, data, engineConfig);
     }

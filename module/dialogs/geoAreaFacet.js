@@ -4,6 +4,7 @@
 function geoAreaFacetDialog(column) {
     this.column = column;
     this.polygons = {};
+    this.polygonCounter=0;
 }
 
 geoAreaFacetDialog.prototype = {
@@ -76,7 +77,19 @@ geoAreaFacetDialog.prototype = {
                 var type = e.layerType,
                     layer = e.layer;
 
-                console.info(e);
+                var json = layer.toGeoJSON();
+                if(type.toLowerCase().contains("circle")){
+                    json = circleToGeoJSON(layer);
+                    var circle = {}
+                    json["type"] = "Feature";
+                    json["id"] = "5657";
+                    json["properties"] = {};
+                    L.geoJson(json,{
+                        style: function (feature) {
+                            return {color: "red"};
+                        }}).addTo(map);
+                }
+                self.polygons[self.polygonCounter++] = json.geometry;
                 drawnItems.addLayer(layer);
             });
 
@@ -101,18 +114,16 @@ geoAreaFacetDialog.prototype = {
         DialogSystem.dismissUntil(this.dialogLevel - 1);
     },
 
-    run: function (column) {
+    run: function () {
         var self = this;
-
-
-        console.info(expression);
+        var jsonToString = JSON.stringify(self.polygons);
+        var expression = "value.isInTheArea(\""+jsonToString.replace(/"/g,"\\\"")+"\")";
         ui.browsingEngine.addFacet(
-            "range",
+            "list",
             {
                 "name": self.column.name,
                 "columnName": self.column.name,
-                "expression": value,
-                "mode": "range"
+                "expression": expression
             }
         );
 

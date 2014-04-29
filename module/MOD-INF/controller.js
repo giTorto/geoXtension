@@ -1,13 +1,10 @@
 var logger = Packages.org.slf4j.LoggerFactory.getLogger("geo-extension"),
     refineServlet = Packages.com.google.refine.RefineServlet,
-    operationRegistry = Packages.com.google.refine.operations.OperationRegistry,
-    File = Packages.java.io.File,
-    refineServlet = Packages.com.google.refine.RefineServlet;
-
+    operationRegistry = Packages.com.google.refine.operations.OperationRegistry;
 function init() {
     var RS = Packages.com.google.refine.RefineServlet;
 
-    var cacheFolder = new refineServlet().getCacheDir("geo-extension");
+    //var cacheFolder = new refineServlet().getCacheDir("geo-extension");
 
     //adding commands
     RS.registerCommand(module, "convertGeo", new Packages.free.giTorto.commands.ConvertProjectionCommand);
@@ -26,6 +23,8 @@ function init() {
     //adding functions
     Packages.com.google.refine.grel.ControlFunctionRegistry.registerFunction(
         "distanceFromAPoint", new Packages.free.giTorto.functions.geoDistanceFromAPoint());
+    Packages.com.google.refine.grel.ControlFunctionRegistry.registerFunction(
+        "isInTheArea", new Packages.free.giTorto.functions.geoIsInTheArea());
 
     // Script files to inject into /project page
     var resourceManager = Packages.com.google.refine.ClientSideResourceManager;
@@ -45,35 +44,35 @@ function init() {
             "scripts/util.js",
 
             //import for Leaflet.draw   
-                "leaflet.draw/examples/libs/leaflet-src.js",
-                "leaflet.draw/src/Leaflet.draw.js",
-                "leaflet.draw/src/edit/handler/Edit.Poly.js",
-                "leaflet.draw/src/edit/handler/Edit.SimpleShape.js",
-                "leaflet.draw/src/edit/handler/Edit.Circle.js",
-                "leaflet.draw/src/edit/handler/Edit.Rectangle.js",
+            "leaflet.draw/examples/libs/leaflet-src.js",
+            "leaflet.draw/src/Leaflet.draw.js",
+            "leaflet.draw/src/edit/handler/Edit.Poly.js",
+            "leaflet.draw/src/edit/handler/Edit.SimpleShape.js",
+            "leaflet.draw/src/edit/handler/Edit.Circle.js",
+            "leaflet.draw/src/edit/handler/Edit.Rectangle.js",
 
-                "leaflet.draw/src/draw/handler/Draw.Feature.js",
-                "leaflet.draw/src/draw/handler/Draw.Polyline.js",
-                "leaflet.draw/src/draw/handler/Draw.Polygon.js",
-                "leaflet.draw/src/draw/handler/Draw.SimpleShape.js",
-                "leaflet.draw/src/draw/handler/Draw.Rectangle.js",
-                "leaflet.draw/src/draw/handler/Draw.Circle.js",
-                "leaflet.draw/src/draw/handler/Draw.Marker.js",
+            "leaflet.draw/src/draw/handler/Draw.Feature.js",
+            "leaflet.draw/src/draw/handler/Draw.Polyline.js",
+            "leaflet.draw/src/draw/handler/Draw.Polygon.js",
+            "leaflet.draw/src/draw/handler/Draw.SimpleShape.js",
+            "leaflet.draw/src/draw/handler/Draw.Rectangle.js",
+            "leaflet.draw/src/draw/handler/Draw.Circle.js",
+            "leaflet.draw/src/draw/handler/Draw.Marker.js",
 
-                "leaflet.draw/src/ext/LatLngUtil.js",
-                "leaflet.draw/src/ext/GeometryUtil.js",
-                "leaflet.draw/src/ext/LineUtil.Intersect.js",
-                "leaflet.draw/src/ext/Polyline.Intersect.js",
-                "leaflet.draw/src/ext/Polygon.Intersect.js",
+            "leaflet.draw/src/ext/LatLngUtil.js",
+            "leaflet.draw/src/ext/GeometryUtil.js",
+            "leaflet.draw/src/ext/LineUtil.Intersect.js",
+            "leaflet.draw/src/ext/Polyline.Intersect.js",
+            "leaflet.draw/src/ext/Polygon.Intersect.js",
 
-                "leaflet.draw/src/Control.Draw.js",
-                "leaflet.draw/src/Tooltip.js",
-                "leaflet.draw/src/Toolbar.js",
+            "leaflet.draw/src/Control.Draw.js",
+            "leaflet.draw/src/Tooltip.js",
+            "leaflet.draw/src/Toolbar.js",
 
-                "leaflet.draw/src/draw/DrawToolbar.js",
-                "leaflet.draw/src/edit/EditToolbar.js",
-                "leaflet.draw/src/edit/handler/EditToolbar.Edit.js",
-                "leaflet.draw/src/edit/handler/EditToolbar.Delete.js"
+            "leaflet.draw/src/draw/DrawToolbar.js",
+            "leaflet.draw/src/edit/EditToolbar.js",
+            "leaflet.draw/src/edit/handler/EditToolbar.Edit.js",
+            "leaflet.draw/src/edit/handler/EditToolbar.Delete.js"
         ]
     );
 

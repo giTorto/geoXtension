@@ -15,12 +15,12 @@ geoConvertDialog.prototype = {
         controls.cancel.click(this.geoLink("hide"));
 
         controls.convert.click(function () {
-            var from=$('#from_projection').val();
-            var to =$('#to_projection').val();
+            var from = $('#from_projection').val();
+            var to = $('#to_projection').val();
 
-            if ( from!=null && from!="" && from!=" " && to != null && to!="" && to!=" "){
+            if (from != null && from != "" && from != " " && to != null && to != "" && to != " ") {
                 self.execute(from, to);
-            }else{
+            } else {
                 alert("You must choose both from which projection and to which projection");
             }
 
@@ -37,26 +37,26 @@ geoConvertDialog.prototype = {
         });
 
         $('#from_projection').autocomplete({
-            source: function(request, response){
-                var matcher = new RegExp( $.ui.autocomplete.escapeRegex( request.term ), "i" );
-                response( $.grep( coord_ref_sistem, function( value ) {
+            source: function (request, response) {
+                var matcher = new RegExp($.ui.autocomplete.escapeRegex(request.term), "i");
+                response($.grep(coord_ref_sistem,function (value) {
                     return matcher.test(value.label) || matcher.test(value.code)
-                }).slice(0,12)
+                }).slice(0, 12)
                 );
             },
-            appendTo:"#fromwrapper"
-        })
+            appendTo: "#fromwrapper"
+        });
 
 
         $('#to_projection').autocomplete({
-            source: function(request, response){
-                var matcher = new RegExp( $.ui.autocomplete.escapeRegex( request.term ), "i" );
-                response( $.grep( coord_ref_sistem, function( value ) {
+            source: function (request, response) {
+                var matcher = new RegExp($.ui.autocomplete.escapeRegex(request.term), "i");
+                response($.grep(coord_ref_sistem,function (value) {
                     return matcher.test(value.label) || matcher.test(value.code)
-                }).slice(0,12)
+                }).slice(0, 12)
                 );
             },
-            appendTo:"#towrapper"
+            appendTo: "#towrapper"
         })
 
     },
@@ -65,29 +65,29 @@ geoConvertDialog.prototype = {
         DialogSystem.dismissUntil(this.dialogLevel - 1);
     },
 
-    execute: function (from,to) {
+    execute: function (from, to) {
         var data = {  };
         data["column"] = this.column.name;
 
-        if ( from == to ){
+        if (from == to) {
             alert("You are converting from a standard projection to the same standard projection");
         }
 
-        for(var i in coord_ref_sistem){
-            if ( (String)(coord_ref_sistem[i].label.toLowerCase()).contains(from.toLowerCase())) {
+        for (var i in coord_ref_sistem) {
+            if ((String)(coord_ref_sistem[i].label.toLowerCase()).contains(from.toLowerCase())) {
                 data["from"] = coord_ref_sistem[i].code;
-            }else if ((String)(coord_ref_sistem[i].label.toLowerCase()).contains(to.toLowerCase()) ) {
+            } else if ((String)(coord_ref_sistem[i].label.toLowerCase()).contains(to.toLowerCase())) {
                 data["to"] = coord_ref_sistem[i].code;
             }
         }
 
-        if (data["from"]==null || data["to"]==null){
+        if (data["from"] == null || data["to"] == null) {
             alert("Sorry, the chosen projections are not supported!");
-        }else{
-        Refine.postProcess('geo-extension', 'convertGeo', data, {},
-            { rowsChanged: true, modelsChanged: true });
-        this.hide();
+        } else {
+            Refine.postProcess('geo-extension', 'convertGeo', data, {},
+                { rowsChanged: true, modelsChanged: true });
+            this.hide();
         }
-    },
+    }
 
 };

@@ -57,7 +57,7 @@ public class ShowOnMapCommand extends Command {
             String[] rowIndexes = rowIndices.split(" ");
             cleanIndexes = new Vector<Integer>(rowIndexes.length);
             for (int i = 0; i < rowIndexes.length; i++)
-                cleanIndexes.add((Integer) Integer.parseInt(rowIndexes[i]));
+                cleanIndexes.add(Integer.parseInt(rowIndexes[i]));
         }
 
         try {
@@ -98,9 +98,10 @@ public class ShowOnMapCommand extends Command {
     /**
      * This function returns the rowvisitor that allows to visit each cell and place all values
      * in the wktObjects according to the indexToTake
-     * @param project the project we are working on
-     * @param cellIndex the cell index to check and parse
-     * @param wktObjects the container of values finded
+     *
+     * @param project     the project we are working on
+     * @param cellIndex   the cell index to check and parse
+     * @param wktObjects  the container of values finded
      * @param indexToTake the index to check, if null it runs on all rows
      * @return a RowVisitor that visit each cell
      * @throws Exception

@@ -9,9 +9,7 @@ function geoShowDialog(column, mode) {
 
 geoShowDialog.prototype = {
     init: function (callback) {
-        var self = this,
-            selectedServices = {},
-            dialogElement = this.dialogElement = $(DOM.loadHTML("geo-extension", "dialogs/geoShow.html"));
+        var dialogElement = this.dialogElement = $(DOM.loadHTML("geo-extension", "dialogs/geoShow.html"));
 
         /* Set labels */
         $('.column-name', dialogElement).text(this.column.name);
@@ -89,7 +87,7 @@ geoShowDialog.prototype = {
                 if (initCallback)
                     initCallback.apply(self);
             }
-        }
+        };
 
         Refine.postProcess('geo-extension', 'showGeo', data, {},
             { rowsChanged: true, modelsChanged: true }, callback

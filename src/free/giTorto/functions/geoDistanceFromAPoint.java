@@ -12,23 +12,23 @@ import java.util.Properties;
 /**
  * @author Giuliano Tortoreto
  */
-public class geoDistanceFromAPoint implements Function{
+public class geoDistanceFromAPoint implements Function {
 
     @Override
     public Object call(Properties bindings, Object[] args) {
-        if (args.length==2){
+        if (args.length == 2) {
             Object pointA = args[0];
             Object pointB = args[1];
 
-            if((pointA instanceof String) && (pointB instanceof String)) {
-                try{
+            if ((pointA instanceof String) && (pointB instanceof String)) {
+                try {
                     Geometry A = Geometry.CreateFromWkt((String) pointA);
                     Geometry B = Geometry.CreateFromWkt((String) pointB);
                     return A.Distance(B);
-                }catch(Exception e){
+                } catch (Exception e) {
                     return new EvalError(ControlFunctionRegistry.getFunctionName(this) + e.getMessage());
                 }
-        }
+            }
 
 
         }
@@ -39,9 +39,12 @@ public class geoDistanceFromAPoint implements Function{
     @Override
     public void write(JSONWriter writer, Properties options) throws JSONException {
         writer.object();
-        writer.key("description"); writer.value("Returns the distance from two points");
-        writer.key("params"); writer.value("2 string");
-        writer.key("returns"); writer.value("number");
+        writer.key("description");
+        writer.value("Returns the distance from two points");
+        writer.key("params");
+        writer.value("2 string");
+        writer.key("returns");
+        writer.value("number");
         writer.endObject();
     }
 }
