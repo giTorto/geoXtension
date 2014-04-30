@@ -2,7 +2,6 @@ geoXtension for OpenRefine
 ======================================
 
 This is an Extension for OpenRefine.
-
 This extension allows to:
 - Show you **wkt objects on a map**
 - Convert from **one projection to another**
