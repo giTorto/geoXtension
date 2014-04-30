@@ -1,5 +1,5 @@
 /**
- * Created by giulian on 26/03/14.
+ * @author Giuliano Tortoreto
  */
 function geoAreaFacetDialog(column) {
     this.column = column;
@@ -19,7 +19,7 @@ geoAreaFacetDialog.prototype = {
         var controls = DOM.bind(this.dialogElement);
         controls.cancel.click(this.geoLink("hide"));
         controls.ok.click(function () {
-            self.run(this.column)
+            self.run();
         });
 
         if (callback)

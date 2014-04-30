@@ -5,7 +5,7 @@ geoAboutDialog.prototype = {
     this.dialogElement = $(DOM.loadHTML("geo-extension", "dialogs/about.html"));
     console.log(this.dialogElement);
     var controls = DOM.bind(this.dialogElement);
-    controls.close.click(this.link("hide"));
+    controls.close.click(this.geoLink("hide"));
   },
   
   show: function () {

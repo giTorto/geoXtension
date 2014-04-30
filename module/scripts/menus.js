@@ -1,13 +1,12 @@
 /* Add menu to extension bar */
 ExtensionBar.addExtensionMenu({
     id: "geo-extension",
-    label: "geo extension",
+    label: "geoXtension",
     submenu: [
-
         {
             id: "geo-extension/about",
             label: "About...",
-            click: dialogHandler(AboutDialog)
+            click: dialogHandler(geoAboutDialog)
         }
     ]
 });
