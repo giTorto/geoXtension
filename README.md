@@ -11,7 +11,7 @@ This extension allows to:
    * by *area*: given selected areas on the map and a column containing wkt objects it shows the rows of the project that belong to that area and the rows that doesn't
    * by *type*: given a wkt columns it shows you the rows clusterized for the type
 
-**NOTE**: this extension **needed** an **internet connection**.
+**NOTE**: this extension **needs** an **internet connection**.
 
 ##INSTALLATION
 0. Download and Install GEOS(3.4.2)
