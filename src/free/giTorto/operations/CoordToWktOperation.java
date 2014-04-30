@@ -48,7 +48,6 @@ public class CoordToWktOperation extends EngineDependentOperation {
         String columName = obj.getString("columnName");
         String latitude = obj.getString("latitude");
         String longitude = obj.getString("longitude");
-        String comm = obj.getString("op");
 
         HashMap<String,Object> dati = new HashMap<String, Object>();
         dati.put("longitude",longitude);

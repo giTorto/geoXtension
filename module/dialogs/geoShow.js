@@ -43,7 +43,6 @@ geoShowDialog.prototype = {
 
                         for (var index = 0; index < arrayJson.length; index++){
                             geoData["features"].push(JSON.parse(arrayJson[index].geoFeature));
-                            console.info(arrayJson[index].geoFeature);
                         }
 
 

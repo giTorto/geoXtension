@@ -41,37 +41,6 @@ function init() {
             "scripts/menus.js",
             "scripts/coordinate-ref-geo.js",
             "scripts/util.js"
-
-            //import for Leaflet.draw
-           /* "leaflet.draw/examples/libs/leaflet-src.js",
-            "leaflet.draw/src/Leaflet.draw.js",
-            "leaflet.draw/src/edit/handler/Edit.Poly.js",
-            "leaflet.draw/src/edit/handler/Edit.SimpleShape.js",
-            "leaflet.draw/src/edit/handler/Edit.Circle.js",
-            "leaflet.draw/src/edit/handler/Edit.Rectangle.js",
-
-            "leaflet.draw/src/draw/handler/Draw.Feature.js",
-            "leaflet.draw/src/draw/handler/Draw.Polyline.js",
-            "leaflet.draw/src/draw/handler/Draw.Polygon.js",
-            "leaflet.draw/src/draw/handler/Draw.SimpleShape.js",
-            "leaflet.draw/src/draw/handler/Draw.Rectangle.js",
-            "leaflet.draw/src/draw/handler/Draw.Circle.js",
-            "leaflet.draw/src/draw/handler/Draw.Marker.js",
-
-            "leaflet.draw/src/ext/LatLngUtil.js",
-            "leaflet.draw/src/ext/GeometryUtil.js",
-            "leaflet.draw/src/ext/LineUtil.Intersect.js",
-            "leaflet.draw/src/ext/Polyline.Intersect.js",
-            "leaflet.draw/src/ext/Polygon.Intersect.js",
-
-            "leaflet.draw/src/Control.Draw.js",
-            "leaflet.draw/src/Tooltip.js",
-            "leaflet.draw/src/Toolbar.js",
-
-            "leaflet.draw/src/draw/DrawToolbar.js",
-            "leaflet.draw/src/edit/EditToolbar.js",
-            "leaflet.draw/src/edit/handler/EditToolbar.Edit.js",
-            "leaflet.draw/src/edit/handler/EditToolbar.Delete.js"*/
         ]
     );
 
@@ -87,10 +56,7 @@ function init() {
             "dialogs/geoConvert.less",
             "dialogs/about.less",
             "styles/dialogs.less",
-            "styles/main.less",
-            //import to use leaflet.draw
-            //"leaflet.draw/examples/libs/leaflet.css",
-            //"leaflet.draw/dist/leaflet.draw.css"
+            "styles/main.less"
         ]
     );
 }

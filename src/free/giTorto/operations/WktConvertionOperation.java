@@ -81,7 +81,6 @@ public class WktConvertionOperation extends EngineDependentMassCellOperation {
             @Override
             public boolean visit(Project project, int rowIndex, Row row) {
                 Cell cell = row.getCell(cellIndex);
-
                 final Serializable cellValue = cell == null ? null : cell.value;
                 final String text = cellValue == null ? "" : cellValue.toString().trim();
                 Cell newCell;
@@ -96,8 +95,6 @@ public class WktConvertionOperation extends EngineDependentMassCellOperation {
                     CellChange cellChange = new CellChange(rowIndex, cellIndex, cell, newCell);
                     cellChanges.add(cellChange);
                 }
-
-
                 return false;
             }
 
@@ -118,7 +115,6 @@ public class WktConvertionOperation extends EngineDependentMassCellOperation {
     protected String getBriefDescription(Project project) {
         return "Projection transform from "+ data.get("from") + " projection to " + data.get("to") +" on cells in columnName " + _columnName;
     }
-
 
     @Override
     public void write(JSONWriter writer, Properties options) throws JSONException {
@@ -149,7 +145,6 @@ public class WktConvertionOperation extends EngineDependentMassCellOperation {
         String result = from_geo.ExportToWkt();
 
         return new Cell(result, null);
-
     }
 
 }

@@ -28,7 +28,6 @@ function circleToGeoJSON(layer){
     const r2d = 180 / Math.PI;   // radians to degrees
     const earthRadius = 6378000;
     const radius = layer.getRadius();
-    console.info("Il raggio è :" + radius);
     const center = layer.getLatLng();
     var geoJson = {};
     var geometry = {};
