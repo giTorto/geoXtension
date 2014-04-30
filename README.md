@@ -1,7 +1,7 @@
 geoXtension for OpenRefine
 ======================================
 
-This is an Extension for OpenRefine. (Note that for this extension internet connection is needed)
+This is an Extension for OpenRefine. (NOTE: for this extension **internet connection** is **needed**)
 This extension allows to:
 - Show you **wkt objects on a map**
 - Convert from **one projection to another**
