@@ -1,4 +1,4 @@
-package free.giTorto.singleton;
+package free.giTorto.caches;
 
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
@@ -12,12 +12,13 @@ import java.util.Vector;
 import java.util.concurrent.ExecutionException;
 
 /**
+ * This class allows to cache geometries Vector given a string containing JSONObjects
  * @author Giuliano Tortoreto
  */
-public class CacheGeometries {
+public class CachePolygons {
    private  LoadingCache<String,Vector<Geometry>> geometryCache;
 
-   private CacheGeometries(){
+   private CachePolygons(){
        geometryCache = CacheBuilder.newBuilder()
                .maximumSize(512)
                .build(new CacheLoader<String, Vector<Geometry>>() {
@@ -28,6 +29,11 @@ public class CacheGeometries {
                });
    }
 
+    /**
+     * This function, given a string returns the extracted Vector of Geometries
+     * @param s is a string containing a JSONObject, which contains a list of JSONObject geometries
+     * @return a geometries Vector
+     */
     private Vector<Geometry> stringToGeometries (String s){
         Vector<Geometry> geometries = new Vector<Geometry>(1);
         try {
@@ -43,14 +49,22 @@ public class CacheGeometries {
         return geometries;
     }
 
+    /**
+     * This class ensure the Thread safety
+     */
     static class SingletonHolder {
-        final static CacheGeometries INSTANCE = new CacheGeometries();
+        final static CachePolygons INSTANCE = new CachePolygons();
     }
 
-    public static CacheGeometries getInstance() {
+    public static CachePolygons getInstance() {
         return SingletonHolder.INSTANCE;
     }
 
+    /**
+     * This function wraps the get function of the cache
+     * @param stringaGeometrie the String to pass to the cache as a key
+     * @return the geometry take from the cache
+     */
     public Vector<Geometry> get(String stringaGeometrie){
         try {
             return geometryCache.get(stringaGeometrie);

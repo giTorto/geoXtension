@@ -3,7 +3,7 @@ package free.giTorto.functions;
 import com.google.refine.expr.EvalError;
 import com.google.refine.grel.ControlFunctionRegistry;
 import com.google.refine.grel.Function;
-import free.giTorto.singleton.CacheGeometries;
+import free.giTorto.caches.CachePolygons;
 import org.gdal.ogr.Geometry;
 import org.json.JSONException;
 import org.json.JSONWriter;
@@ -25,7 +25,7 @@ public class geoIsInTheArea implements Function {
             if ((firstElem instanceof String) && (secondElem instanceof String)) {
                 String pointA = (String) firstElem;
                 String pointB = (String) secondElem;
-                CacheGeometries cache = CacheGeometries.getInstance();
+                CachePolygons cache = CachePolygons.getInstance();
 
                 if (pointA.charAt(0) == '\"')
                     pointA.substring(1, pointA.length() - 1);
