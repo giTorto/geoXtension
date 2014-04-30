@@ -3,10 +3,10 @@ geoXtension for OpenRefine
 
 This is an Extension for OpenRefine.
 This extension allows to:
-0. Show you **wkt objects on a map**
-0. Convert from **one projection to another**
-0. Create **WKT point from two columns** (one stands for the latitude and one stands for the longitude).
-0. **Facet** based on spatial reference:
+00. Show you **wkt objects on a map**
+00. Convert from **one projection to another**
+00. Create **WKT point from two columns** (one stands for the latitude and one stands for the longitude).
+00. **Facet** based on spatial reference:
 ..* by distance: given a selected point on the map and a column containing wkt object it shows the distance from each wkt point in the project from that point
 ..* by area: given a selected area on the map and a column containing wkt objects it shows the rows of the project that belong to that area and the rows that doesn't
 ..* by type: given a wkt columns it shows you the rows clusterized for the type
