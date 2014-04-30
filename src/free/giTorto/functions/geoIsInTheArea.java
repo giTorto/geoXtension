@@ -3,13 +3,14 @@ package free.giTorto.functions;
 import com.google.refine.expr.EvalError;
 import com.google.refine.grel.ControlFunctionRegistry;
 import com.google.refine.grel.Function;
+import free.giTorto.singleton.CacheGeometries;
 import org.gdal.ogr.Geometry;
 import org.json.JSONException;
-import org.json.JSONObject;
 import org.json.JSONWriter;
 
 import java.util.Iterator;
 import java.util.Properties;
+import java.util.Vector;
 
 /**
  * @Author Giuliano Tortoreto
@@ -24,6 +25,7 @@ public class geoIsInTheArea implements Function {
             if ((firstElem instanceof String) && (secondElem instanceof String)) {
                 String pointA = (String) firstElem;
                 String pointB = (String) secondElem;
+                CacheGeometries cache = CacheGeometries.getInstance();
 
                 if (pointA.charAt(0) == '\"')
                     pointA.substring(1, pointA.length() - 1);
@@ -31,28 +33,37 @@ public class geoIsInTheArea implements Function {
                 if (pointB.charAt(0) == '\"')
                     pointB.substring(1, pointB.length() - 1);
 
-                JSONObject geoJsonPolygons = null;
+                Vector<Geometry> Polygons = null;
                 Geometry wkt;
                 try {
                     if (pointA.charAt(0) == '{'){
-                        geoJsonPolygons = new JSONObject(pointA);
                         wkt = Geometry.CreateFromWkt(pointB);
+                        Polygons = cache.get(pointA);
                     }else if (pointB.charAt(0) == '{'){
-                        geoJsonPolygons = new JSONObject(pointB);
                         wkt = Geometry.CreateFromWkt(pointA);
+                        Polygons = cache.get(pointB);
                     }else{
                        return new EvalError("One of the parameter must be a Stringified json object contanining geojson object");
                     }
 
-                    Iterator iterator = geoJsonPolygons.keys();
+                    Iterator iterator = Polygons.iterator();
+                    Geometry temp;
+                    int i = 1;
+                    while(iterator.hasNext()){
 
-                    Geometry polygon;
-                    int i = 0;
-                    while (iterator.hasNext()){
-                        polygon = Geometry.CreateFromJson(geoJsonPolygons.get((String)iterator.next()).toString());
+                        temp = (Geometry)iterator.next();
 
-                        if (polygon!=null && polygon.Contains(wkt))
-                            return (i+" polygon drawn");
+                        if (temp!=null && temp.Contains(wkt)){
+                            if (Integer.toString(i).equals("11") || Integer.toString(i).equals("12")
+                                || Integer.toString(i).equals("13") || Integer.toString(i).matches("(.*[4567890])"))
+                                    return (i+"th Polygon");
+                            else if (Integer.toString(i).contains("1"))
+                                return (i+"st Polygon");
+                            else if (Integer.toString(i).contains("2"))
+                                return (i+"nd Polygon");
+                            else if (Integer.toString(i).contains("3"))
+                                return (i+"rd Polygon");
+                        }
 
                         i++;
                     }
@@ -84,3 +95,4 @@ public class geoIsInTheArea implements Function {
         writer.endObject();
     }
 }
+

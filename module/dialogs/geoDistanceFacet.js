@@ -3,7 +3,10 @@
  */
 function geoDistanceFacetDialog(column) {
     this.column = column;
-    this.point = null;
+    this.point = {};
+    this.point["lat"];
+    this.point["lng"];
+
 }
 
 geoDistanceFacetDialog.prototype = {
@@ -35,14 +38,24 @@ geoDistanceFacetDialog.prototype = {
         $.getScript("http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js", function () {
 
             // set up the map
-            map = new L.Map('map').setView([47.505, 11.3], 5);
-
+            map = new L.Map('map').setView([47.505, 11.3], 10);
 
             //setting the tile layer
             L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 attribution: '© <a href="http://openstreetmap.org">OpenStreetMap</a> contributors',
                 maxZoom: 18
             }).addTo(map);
+
+            function onLocationFound(e) {
+                self.point["lat"] = e.latitude;
+                self.point["lng"] = e.longitude;
+                document.getElementById("latChosen").value = self.point.lat;
+                document.getElementById("lonChosen").value = self.point.lng;
+            }
+
+            window.locateUser = function () {
+                map.locate({setView: true}).on('locationfound', onLocationFound);
+            }
 
 
             function onMapClick(e) {
@@ -83,3 +96,4 @@ geoDistanceFacetDialog.prototype = {
     }
 
 };
+

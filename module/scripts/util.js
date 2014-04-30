@@ -36,13 +36,14 @@ function circleToGeoJSON(layer){
     geometry["coordinates"] = [];
     var lat_lng;
     var points = 64.0;
-    var polygon_sides = (radius/422);
 
-    if(polygon_sides > points)
-        if (polygon_sides>2048)
-            points = 2048;
+    var polygon_points = (radius/422);
+
+    if(polygon_points > points)
+        if (polygon_points>1024) //the limit is 1024 because of gdal have problem with polygons with more than 1024 points
+            points = 1024;
         else
-            points = polygon_sides;
+            points = polygon_points;
 
     var coordinates = [];
     var r_latitude = (radius/earthRadius) * r2d;
@@ -57,11 +58,8 @@ function circleToGeoJSON(layer){
         coordinates.push(lat_lng);
     }
 
-/*    if(coordinates[0] == coordinates[coordinates.length-1])
-        coordinates = coordinates.splice(coordinates.length-1,1);*/
     if(coordinates[0] != coordinates[coordinates.length-1])
         coordinates.push(coordinates[0]);
-    console.info(coordinates);
 
     geometry["coordinates"].push(coordinates);
     geoJson["geometry"]=geometry;
