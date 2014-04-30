@@ -8,7 +8,7 @@ This extension allows to:
 - Create **WKT point from two columns** (one stands for the latitude and one stands for the longitude).
 - **Facet** based on spatial reference:
    * by distance: given a selected point on the map and a column containing wkt object it shows the distance from each wkt point in the project from that point
-   * by area: given a selected area on the map and a column containing wkt objects it shows the rows of the project that belong to that area and the rows that doesn't
+   * by area: given selected areas on the map and a column containing wkt objects it shows the rows of the project that belong to that area and the rows that doesn't
    * by type: given a wkt columns it shows you the rows clusterized for the type
 
 ##INSTALLATION
