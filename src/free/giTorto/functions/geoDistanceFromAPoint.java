@@ -4,6 +4,7 @@ import com.google.refine.expr.EvalError;
 import com.google.refine.grel.ControlFunctionRegistry;
 import com.google.refine.grel.Function;
 import free.giTorto.caches.CachePoints;
+import org.gdal.ogr.Geometry;
 import org.json.JSONException;
 import org.json.JSONWriter;
 
@@ -23,7 +24,8 @@ public class geoDistanceFromAPoint implements Function {
 
             if ((pointA instanceof String) && (pointB instanceof String)) {
                 try {
-                    return cache.get((String)pointA).Distance(cache.get((String)pointB));
+                    Geometry a = Geometry.CreateFromWkt((String)pointA);
+                    return a.Distance(cache.get((String)pointB));
                 } catch (Exception e) {
                     return new EvalError(ControlFunctionRegistry.getFunctionName(this) + e.getMessage());
                 }

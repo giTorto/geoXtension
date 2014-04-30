@@ -10,6 +10,7 @@ import org.json.JSONObject;
 import java.util.Iterator;
 import java.util.Vector;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 
 /**
  * This class allows to cache geometries Vector given a string containing JSONObjects
@@ -20,6 +21,7 @@ public class CachePolygons {
 
    private CachePolygons(){
        geometryCache = CacheBuilder.newBuilder()
+               .expireAfterAccess(1, TimeUnit.DAYS)
                .maximumSize(512)
                .build(new CacheLoader<String, Vector<Geometry>>() {
                    @Override

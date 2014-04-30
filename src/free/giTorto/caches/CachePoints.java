@@ -22,7 +22,7 @@ public class CachePoints {
     private CachePoints(){
         geometryCache = CacheBuilder.newBuilder()
                 .maximumSize(1024)
-                .expireAfterAccess(500, TimeUnit.MILLISECONDS)
+                .expireAfterAccess(1, TimeUnit.DAYS)
                 .build(new CacheLoader<String, Geometry>() {
                     @Override
                     public Geometry load(String s) throws Exception {
