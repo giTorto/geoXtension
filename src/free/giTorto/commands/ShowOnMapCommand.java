@@ -22,6 +22,8 @@ import java.io.Serializable;
 import java.util.Vector;
 
 /**
+ * This is the Command thriggered on the initialization of the dialog
+ * ShowOnMap
  * @author Giuliano Tortoreto
  */
 public class ShowOnMapCommand extends Command {
@@ -112,7 +114,6 @@ public class ShowOnMapCommand extends Command {
             Vector<Integer> indexToTake;
             Vector<String> wktObjects;
             String[] tempArray = new String[2];
-            String[] geometries = null;
             Geometry geo = null;
             JSONObject geoJson = null;
 
@@ -148,9 +149,6 @@ public class ShowOnMapCommand extends Command {
                 cellValue = cell == null ? null : cell.value;
 
                 tempArray[1] = cellValue == null ? "" : cellValue.toString().trim();
-
-                //splitGeometryCollection
-                geometries = text.split("([a-zA-Z]+[\\W])");
 
                 //the selected column add
                 geoJson = new JSONObject();

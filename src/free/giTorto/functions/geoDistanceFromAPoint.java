@@ -11,6 +11,8 @@ import org.json.JSONWriter;
 import java.util.Properties;
 
 /**
+ * This is a function added at the Refine Expression Languages, and given two point returns
+ * the distance between them
  * @author Giuliano Tortoreto
  */
 public class geoDistanceFromAPoint implements Function {

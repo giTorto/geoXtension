@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 
 /**
+ * This is the command thriggered by the ConvertProjectionDialog
  * @author Giuliano Tortoreto
  */
 public class ConvertProjectionCommand extends EngineDependentCommand {
