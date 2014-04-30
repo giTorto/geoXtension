@@ -21,7 +21,7 @@ This extension allows to:
 
 ##USAGE
 0. Open or create a project
-0. Click the small triangle before the column name and choose *Extract e-mails,urls,etx...*
+0. Click the small triangle before the column name and choose *geo extension*
 0. Choose the interest operation
 
 ##LICENSE
