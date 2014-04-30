@@ -72,5 +72,4 @@ function swapValues() {
 
     $('#latitude').find('option:contains(' + lngVal.value + ')').prop('selected', true);
     $('#longitude').find('option:contains(' + latVal.value + ')').prop('selected', true);
-
 }

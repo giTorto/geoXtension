@@ -10,7 +10,6 @@ function init() {
     RS.registerCommand(module, "convertGeo", new Packages.free.giTorto.commands.ConvertProjectionCommand);
     RS.registerCommand(module, "convertLatLngToWKT", new Packages.free.giTorto.commands.ConvertCoordToWktCommand);
     RS.registerCommand(module, "showGeo", new Packages.free.giTorto.commands.ShowOnMapCommand);
-    RS.registerCommand(module, "facetsGeo", new Packages.free.giTorto.commands.GeoFacetCommand);
 
     //adding operations
     operationRegistry.registerOperation(

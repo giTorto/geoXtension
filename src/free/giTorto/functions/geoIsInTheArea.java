@@ -27,19 +27,13 @@ public class geoIsInTheArea implements Function {
                 String pointB = (String) secondElem;
                 CachePolygons cache = CachePolygons.getInstance();
 
-                if (pointA.charAt(0) == '\"')
-                    pointA.substring(1, pointA.length() - 1);
-
-                if (pointB.charAt(0) == '\"')
-                    pointB.substring(1, pointB.length() - 1);
-
                 Vector<Geometry> Polygons = null;
                 Geometry wkt;
                 try {
-                    if (pointA.charAt(0) == '{'){
+                    if (pointA.charAt(0) == '{') {
                         wkt = Geometry.CreateFromWkt(pointB);
                         Polygons = cache.get(pointA);
-                    }else if (pointB.charAt(0) == '{'){
+                    }else if (pointB.charAt(0) == '{') {
                         wkt = Geometry.CreateFromWkt(pointA);
                         Polygons = cache.get(pointB);
                     }else{
@@ -49,11 +43,10 @@ public class geoIsInTheArea implements Function {
                     Iterator iterator = Polygons.iterator();
                     Geometry temp;
                     int i = 1;
-                    while(iterator.hasNext()){
-
+                    while(iterator.hasNext()) {
                         temp = (Geometry)iterator.next();
 
-                        if (temp!=null && temp.Contains(wkt)){
+                        if (temp!=null && temp.Contains(wkt)) {
                             if (Integer.toString(i).equals("11") || Integer.toString(i).equals("12")
                                 || Integer.toString(i).equals("13") || Integer.toString(i).matches("(.*[4567890])"))
                                     return (i+"th Polygon");
@@ -64,7 +57,6 @@ public class geoIsInTheArea implements Function {
                             else if (Integer.toString(i).contains("3"))
                                 return (i+"rd Polygon");
                         }
-
                         i++;
                     }
 

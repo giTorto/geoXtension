@@ -32,7 +32,7 @@ public class CachePoints {
     }
 
     /**
-     * This class ensure the Thread safety
+     * This function ensure the Thread safety
      */
     static class SingletonHolder {
         final static CachePoints INSTANCE = new CachePoints();

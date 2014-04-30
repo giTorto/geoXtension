@@ -52,7 +52,7 @@ public class CachePolygons {
     }
 
     /**
-     * This class ensure the Thread safety
+     * This function ensure the Thread safety
      */
     static class SingletonHolder {
         final static CachePolygons INSTANCE = new CachePolygons();

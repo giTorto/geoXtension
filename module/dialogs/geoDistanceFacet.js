@@ -88,7 +88,6 @@ geoDistanceFacetDialog.prototype = {
                 "mode": "range"
             },
             {
-
             }
         );
 

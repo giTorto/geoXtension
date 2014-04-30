@@ -59,12 +59,9 @@ public class CoordToWktOperation extends EngineDependentOperation {
 
 
     protected RowVisitor createRowVisitor(Project project, Vector<CellAtRow> newCells) throws Exception {
-
         Column column = project.columnModel.getColumnByName(columnName);
         int latCell = project.columnModel.getColumnIndexByName((String)data.get("latitude"));
         int lngCell = project.columnModel.getColumnIndexByName((String)data.get("longitude"));
-
-
 
         return new RowVisitor() {
             int              latCell;
@@ -106,9 +103,9 @@ public class CoordToWktOperation extends EngineDependentOperation {
                 longitude = cellValue == null ? "" : cellValue.toString().trim();
                 longitude = longitude.replaceAll(" ","");
 
-                if (!latitude.equals("") && !longitude.equals("") && pattern.matcher(latitude).matches() && pattern.matcher(longitude).matches()) {
-                    //this is to verify, some source say POINT(x y), but some works with POINT(lat lng) and others with POINT(lng lat) to choose
-                    newCell = new CellAtRow(rowIndex, new Cell("POINT (" + latitude + " " + longitude + ")", null));
+                if (!latitude.equals("") && !longitude.equals("") &&
+                        pattern.matcher(latitude).matches() && pattern.matcher(longitude).matches()) {
+                    newCell = new CellAtRow(rowIndex, new Cell("POINT (" + longitude + " " + latitude + ")", null));
                 }else{
                     newCell = new CellAtRow(rowIndex, new Cell(new EvalError("The latitude or/and longitude given are not a valid number"), null));
                 }
