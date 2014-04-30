@@ -28,13 +28,11 @@ import java.util.Vector;
  */
 public class ShowOnMapCommand extends Command {
 
-
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         doGet(request, response);
 
     }
-
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -46,7 +44,7 @@ public class ShowOnMapCommand extends Command {
         Column column = project.columnModel.getColumnByName(request.getParameter("column"));
         int cellIndex = column.getCellIndex();
 
-        //setting the mode
+        //verifying the mode
         String mode = request.getParameter("mode");
         Boolean onAll = true;
         if ("wys".equals(mode))

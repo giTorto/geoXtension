@@ -76,7 +76,7 @@ public class CoordToWktOperation extends EngineDependentOperation {
                 this.latCell = latCell;
                 this.lngCell = lngCell;
                 this.cellsAtRows = cellAtRows;
-                pattern = Pattern.compile("([\\d]*([\\.,][\\d]*)?)");
+                pattern = Pattern.compile("([\\d]*([\\.,][\\d]+)?)");
                 return this;
             }
 
