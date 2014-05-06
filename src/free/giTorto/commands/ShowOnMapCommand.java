@@ -38,7 +38,6 @@ public class ShowOnMapCommand extends Command {
             throws ServletException, IOException {
         Project project = getProject(request);
         ProjectManager.singleton.setBusy(true);
-
         JSONObject engineConfig;
         Engine engine = new Engine(project);
         Column column = project.columnModel.getColumnByName(request.getParameter("column"));
