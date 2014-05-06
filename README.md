@@ -16,7 +16,7 @@ This extension allows to:
 ##INSTALLATION
 0. Download and Install GEOS(3.4.2)
 0. Download and Install Proj(4.8.0)
-0. Download and Install GDAL(1.9.2) with GEOS support
+0. Download and Install GDAL(1.11.0) with GEOS support
 0. Follow the steps at https://github.com/OpenRefine/OpenRefine/wiki/Installing-Extensions
 
 ##USAGE
