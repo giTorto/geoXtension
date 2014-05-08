@@ -36,8 +36,6 @@ public class ShowOnMapCommand extends Command {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-                
-        System.out.println(System.getProperty("java.library.path"));
         Project project = getProject(request);
         ProjectManager.singleton.setBusy(true);
         JSONObject engineConfig;
