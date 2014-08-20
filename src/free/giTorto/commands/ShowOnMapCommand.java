@@ -139,7 +139,6 @@ public class ShowOnMapCommand extends Command {
 
                 Serializable cellValue = cell == null ? null : cell.value;
                 final String text = cellValue == null ? "" : cellValue.toString().trim();
-                System.out.println(cell.getField("judgment",null));
 
                 //the row index add
                 tempArray[0] = String.valueOf(rowIndex);

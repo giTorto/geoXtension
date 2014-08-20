@@ -83,11 +83,6 @@ DataTableColumnHeaderUI.extendMenu(function (column, columnHeaderUI, menu) {
                     ]
                 },
             ]
-        },
-        {
-            id : "geo-extension/try",
-            label : "Mean",
-            click : function () {new MeanDialog(column.name);}
         }
     ]);
 });
