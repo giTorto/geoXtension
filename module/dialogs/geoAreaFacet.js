@@ -127,7 +127,13 @@ geoAreaFacetDialog.prototype = {
             {
                 "name": self.column.name,
                 "columnName": self.column.name,
-                "expression": expression
+                "expression": expression,
+                "selectError": false,
+                "invert" : false
+            },
+            {
+                scroll : false ,
+                sort : true
             }
         );
 

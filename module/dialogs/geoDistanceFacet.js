@@ -82,7 +82,8 @@ geoDistanceFacetDialog.prototype = {
                 "name": self.column.name,
                 "columnName": self.column.name,
                 "expression": expression,
-                "mode": "range"
+                "mode": "range",
+                "selectError" : true
             },
             {
             }

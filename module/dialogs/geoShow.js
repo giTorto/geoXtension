@@ -78,9 +78,9 @@ geoShowDialog.prototype = {
         data["column"] = this.column.name;
         data["mode"] = this.mode;
         if (this.mode != "all") {
-            data["rowIndices"] = rows[0].i;
+            data["rowIndexes"] = rows[0].i;
             for (var index = 1; index < rows.length; index++)
-                data["rowIndices"] = data["rowIndices"] + " " + rows[index].i;
+                data["rowIndexes"] = data["rowIndexes"] + " " + rows[index].i;
         }
 
         callback = {
@@ -92,7 +92,7 @@ geoShowDialog.prototype = {
         };
 
         Refine.postProcess('geo-extension', 'showGeo', data, {},
-            { rowsChanged: true, modelsChanged: true }, callback
+           {}, callback
         );
 
     }

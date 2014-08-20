@@ -22,7 +22,7 @@ import java.io.Serializable;
 import java.util.Vector;
 
 /**
- * This is the Command thriggered on the initialization of the dialog
+ * This is the Command triggered on the initialization of the dialog
  * ShowOnMap
  * @author Giuliano Tortoreto
  */
@@ -46,13 +46,13 @@ public class ShowOnMapCommand extends Command {
         //verifying the mode
         String mode = request.getParameter("mode");
         Boolean onAll = true;
-        if ("wys".equals(mode))
+        if ("wys".equals(mode) && request.getParameter("rowIndexes")!=null)
             onAll = false;
 
         Vector<Integer> cleanIndexes = null;
         //taking the indices if it's not on all operation
         if (!onAll) {
-            String rowIndices = request.getParameter("rowIndices");
+            String rowIndices = request.getParameter("rowIndexes");
             String[] rowIndexes = rowIndices.split(" ");
             cleanIndexes = new Vector<Integer>(rowIndexes.length);
             for (int i = 0; i < rowIndexes.length; i++)
@@ -133,10 +133,13 @@ public class ShowOnMapCommand extends Command {
                     return false;
                 }
 
+
+
                 Cell cell = row.getCell(cellIndex);
 
                 Serializable cellValue = cell == null ? null : cell.value;
                 final String text = cellValue == null ? "" : cellValue.toString().trim();
+                System.out.println(cell.getField("judgment",null));
 
                 //the row index add
                 tempArray[0] = String.valueOf(rowIndex);

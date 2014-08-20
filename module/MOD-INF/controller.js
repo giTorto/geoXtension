@@ -25,6 +25,10 @@ function init() {
     Packages.com.google.refine.grel.ControlFunctionRegistry.registerFunction(
         "isInTheArea", new Packages.free.giTorto.functions.geoIsInTheArea());
 
+    Packages.com.google.refine.expr.ExpressionUtils.registerBinder(
+        new Packages.free.giTorto.functions.tryBinder()
+    );
+
     // Script files to inject into /project page
     var resourceManager = Packages.com.google.refine.ClientSideResourceManager;
     resourceManager.addPaths(
@@ -40,7 +44,8 @@ function init() {
             "scripts/config.js",
             "scripts/menus.js",
             "scripts/coordinate-ref-geo.js",
-            "scripts/util.js"
+            "scripts/util.js",
+            "dialogs/mean.js"
         ]
     );
 
@@ -56,7 +61,8 @@ function init() {
             "dialogs/geoConvert.less",
             "dialogs/about.less",
             "styles/dialogs.less",
-            "styles/main.less"
+            "styles/main.less",
+            "dialogs/mean.less"
         ]
     );
 }

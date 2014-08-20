@@ -7,8 +7,7 @@ import com.google.refine.expr.EvalError;
 import com.google.refine.history.Change;
 import com.google.refine.history.HistoryEntry;
 import com.google.refine.model.*;
-import com.google.refine.model.changes.CellAtRow;
-import com.google.refine.model.changes.ColumnAdditionChange;
+import com.google.refine.model.changes.*;
 import com.google.refine.operations.EngineDependentOperation;
 import com.google.refine.operations.OperationRegistry;
 import org.json.JSONException;
@@ -109,7 +108,8 @@ public class CoordToWktOperation extends EngineDependentOperation {
                     newCell = new CellAtRow(rowIndex, new Cell(new EvalError("The latitude or/and longitude given are not a valid number"), null));
                 }
 
-                cellsAtRows.add(newCell);
+
+                cellsAtRows.add(rowIndex, newCell);
 
                 return false;
             }
