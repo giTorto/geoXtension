@@ -113,6 +113,7 @@ public class ShowOnMapCommand extends Command {
             String[] tempArray = new String[2];
             Geometry geo = null;
             JSONObject geoJson = null;
+            String message = "";
 
             public RowVisitor init(int cellIndex, Vector<String> wktObjects, Vector<Integer> indexToTake) {
                 this.cellIndex = cellIndex;
@@ -148,18 +149,21 @@ public class ShowOnMapCommand extends Command {
                 cellValue = cell == null ? null : cell.value;
 
                 tempArray[1] = cellValue == null ? "" : cellValue.toString().trim();
-
-                //the selected column add
-                geoJson = new JSONObject();
+                message = JSONObject.quote("row: " + tempArray[0] + ", first column: " + tempArray[1]) ;
 
                 try {
+                    if (text == null || text.equals(""))
+                        return false;
+
+                    geoJson = new JSONObject();
                     geo = Geometry.CreateFromWkt(text);
                     if (geo == null)
                         return false;
+                    
                     //setting the geoJson feature
                     geoJson.put("type", "Feature");
                     geoJson.put("geometry", new JSONObject(geo.ExportToJson()));
-                    geoJson.put("properties", new JSONObject("{\"message\": \"row: " + tempArray[0] + ", first column: " + tempArray[1] + " \" }"));
+                    geoJson.put("properties", new JSONObject("{\"message\": "+ message +" }"));
                     geoJson.put("id", rowIndex);
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -167,7 +171,7 @@ public class ShowOnMapCommand extends Command {
 
                 if (geo != null) {
                     //converting geoJson to string
-                    String result = geoJson.toString().replaceAll("(\\\\\")", "\"");
+                    String result = geoJson.toString();
                     if (indexToTake == null || indexToTake.contains(rowIndex))
                         wktObjects.add(result);
                 }
