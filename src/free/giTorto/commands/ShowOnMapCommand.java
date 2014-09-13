@@ -65,7 +65,7 @@ public class ShowOnMapCommand extends Command {
             engine.initializeFromJSON(engineConfig);
 
             //here the List of the wkt objects is filled using the rowvisitor
-            Vector<String> wktObjects = new Vector<String>(5);
+            Vector<JSONObject> wktObjects = new Vector<JSONObject>(5);
             FilteredRows filteredRows = engine.getAllFilteredRows();
             filteredRows.accept(project, createRowVisitor(project, cellIndex, wktObjects, cleanIndexes));
 
@@ -76,7 +76,7 @@ public class ShowOnMapCommand extends Command {
             writer.object();
             writer.key("wktObjects");
             writer.array();
-            for (String wktObject : wktObjects) {
+            for (JSONObject wktObject : wktObjects) {
                 writer.object();
                 writer.key("geoFeature");
                 writer.value(wktObject);
@@ -105,17 +105,17 @@ public class ShowOnMapCommand extends Command {
      * @return a RowVisitor that visit each cell
      * @throws Exception
      */
-    protected RowVisitor createRowVisitor(Project project, final int cellIndex, final Vector<String> wktObjects, final Vector<Integer> indexToTake) throws Exception {
+    protected RowVisitor createRowVisitor(Project project, final int cellIndex, final Vector<JSONObject> wktObjects, final Vector<Integer> indexToTake) throws Exception {
         return new RowVisitor() {
             int cellIndex;
             Vector<Integer> indexToTake;
-            Vector<String> wktObjects;
+            Vector<JSONObject> wktObjects;
             String[] tempArray = new String[2];
             Geometry geo = null;
             JSONObject geoJson = null;
             String message = "";
 
-            public RowVisitor init(int cellIndex, Vector<String> wktObjects, Vector<Integer> indexToTake) {
+            public RowVisitor init(int cellIndex, Vector<JSONObject> wktObjects, Vector<Integer> indexToTake) {
                 this.cellIndex = cellIndex;
                 this.wktObjects = wktObjects;
                 this.indexToTake = indexToTake;
@@ -159,7 +159,7 @@ public class ShowOnMapCommand extends Command {
                     geo = Geometry.CreateFromWkt(text);
                     if (geo == null)
                         return false;
-                    
+
                     //setting the geoJson feature
                     geoJson.put("type", "Feature");
                     geoJson.put("geometry", new JSONObject(geo.ExportToJson()));
@@ -171,9 +171,8 @@ public class ShowOnMapCommand extends Command {
 
                 if (geo != null) {
                     //converting geoJson to string
-                    String result = geoJson.toString();
                     if (indexToTake == null || indexToTake.contains(rowIndex))
-                        wktObjects.add(result);
+                        wktObjects.add(geoJson);
                 }
 
                 return false;
