@@ -75,7 +75,7 @@ public class CoordToWktOperation extends EngineDependentOperation {
                 this.latCell = latCell;
                 this.lngCell = lngCell;
                 this.cellsAtRows = cellAtRows;
-                pattern = Pattern.compile("([\\d]*([\\.,][\\d]+)?)");
+                pattern = Pattern.compile("([-]?[\\d]*([\\.,][\\d]+)?)");
                 return this;
             }
 
@@ -94,12 +94,12 @@ public class CoordToWktOperation extends EngineDependentOperation {
                 cell = row.getCell(latCell);
                 Serializable cellValue = cell == null ? null : cell.value;
                 latitude = cellValue == null ? "" : cellValue.toString().trim();
-                latitude = latitude.replaceAll(" ","");
+                latitude = latitude.replaceAll("[\\s\\+]","");
 
                 cell = row.getCell(lngCell);
                 cellValue = cell == null ? null : cell.value;
                 longitude = cellValue == null ? "" : cellValue.toString().trim();
-                longitude = longitude.replaceAll(" ","");
+                longitude = longitude.replaceAll("[\\s\\+]","");
 
                 if (!latitude.equals("") && !longitude.equals("") &&
                         pattern.matcher(latitude).matches() && pattern.matcher(longitude).matches()) {
